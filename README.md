@@ -1,35 +1,48 @@
 Enum Behavior
 =============
 
-This simple behavior eases the usage of enum fields in CakePHP. It generated select lists and creates validation rules.
+CakePHP does not support MySQL's `Enum` fields types. I've commed around 3 solutions to conturn this problem: 
+- using a second table
+- using MySQL's Enum and retrieve EnumValues like in [Baked Enums](http://bakery.cakephp.org/articles/view/baked-enums)
+
+This behavior is using an other approach, it stores the configuration in an array which is fast and flexible. It also creates validation rules and the select lists.
 
 Installation
 ------------
 
-Simply put the enum folder and its content in your app/plugins folder.
+Simply put the `enum` folder and its content in your `app/plugins` folder.
 
 Usage
 -----
 
-In your model : 
+Let's assume we have a `posts` table and we want to have a `status` field that could have 3 possible values (`draft`, `published`, `archive`).
+
+Table data :
+
+    id			int(10)
+    title		varchar(65)
+    content		varchar(65)
+    status		varchar(65)
+
+In your `Post` model : 
 
     $actsAs = array(
     	'Enum.Enum' => array(
-    		'example_field' => array('value_1', 'value_2')
+    		'status' => array('draft', 'published', 'archive')
     	)
     );
+    
+    function __translateEnums(){
+    	return;
+    	__('draft', true);
+    	__('published', true);
+    	__('archive', true);
+    }
 
-In your controller :
+In your `Posts` controller, at the end of `add` and `edit` actions :
 
     $this->set($this->Enum->enumValues());
 
-Advanced usage
---------------
 
-If you want to customise the text displayed in the select lists, simply use CakePHP's i18n function.
 
-Put this code anywhere in your app:
-
-    __('value_1', true);
-    __('value_2', true);
 
