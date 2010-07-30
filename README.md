@@ -4,7 +4,6 @@ Enum Behavior
 CakePHP does not support MySQL's `Enum` fields types. I've commed around 3 solutions to conturn this problem: 
 
 - using a second table
-
 - using MySQL's Enum and retrieve EnumValues like in [Baked Enums](http://bakery.cakephp.org/articles/view/baked-enums)
 
 This behavior is using an other approach, it stores the configuration in an array which is fast and flexible. It also creates validation rules and the select lists.
@@ -33,17 +32,16 @@ In your `Post` model :
     		'status' => array('draft', 'published', 'archive')
     	)
     );
-    
-    function __translateEnums(){
-    	return;
-    	__('draft', true);
-    	__('published', true);
-    	__('archive', true);
-    }
 
 In your `Posts` controller, at the end of `add` and `edit` actions :
 
     $this->set($this->Enum->enumValues());
+
+Anywhere in your application:
+
+    __('draft', true);
+    __('published', true);
+    __('archive', true);
 
 
 
