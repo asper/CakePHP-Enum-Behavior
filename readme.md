@@ -37,9 +37,17 @@ In your `Post` model :
     	)
     );
 
-In your `Posts` controller, at the end of `add` and `edit` actions :
+In your `Posts` controller, in the `beforeRender` callback add :
 
     $this->set($this->Post->enumValues());
+
+To display the `status` dropdown menu in your forms you just have to use the `FormHelper` as usual :
+
+    $this->Form->input('Post.status');
+    
+To display the status in your `view` use :
+
+    echo $statuses[$post['Post']['status']];
 
 If yout want the strings to be translated, add (anywhere in your application [even if it doesn't seems right]):
 
