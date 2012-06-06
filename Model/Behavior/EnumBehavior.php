@@ -62,7 +62,7 @@ class EnumBehavior extends ModelBehavior {
 	private function __translate($values = array()){
 		$return = array();
 		foreach($values as $value){
-			$return[] = __(Infector::humanize($value));
+			$return[] = __(Inflector::humanize($value));
 		}
 		return $return;
 	}
