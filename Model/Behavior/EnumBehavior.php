@@ -1,9 +1,9 @@
 <?php
 /**
  * This Behavior gives a convenient way to work with ENUM fields
- * 
+ *
  * @example
- * In your Model : 
+ * In your Model :
  * $actsAs = array(
  * 	'Enum.Enum' => array(
  * 		'exemple_field' => array('value_1', 'value_2')
@@ -11,7 +11,7 @@
  * );
  * In your controller :
  * $this->set($this->{$this->ModelName}->enumValues());
- * 
+ *
  * @author Pierre Aboucaya - Asper <p@asper.fr>
  *
  */
@@ -19,7 +19,7 @@ class EnumBehavior extends ModelBehavior {
 
 	/**
 	 * Setup enum behavior with the specified configuration settings.
-	 * 
+	 *
 	 * @example $actsAs = array(
 	 * 	'Enum.Enum' => array(
 	 * 		'exemple_field' => array('value_1', 'value_2')
@@ -28,7 +28,7 @@ class EnumBehavior extends ModelBehavior {
 	 * @param object $Model Model using this behavior
 	 * @param array $settings Configuration settings for $Model
 	 */
-	public function setup($Model, $settings = array()) { 
+	public function setup($Model, $settings = array()) {
 		$this->settings[$Model->name] = $settings;
 		foreach($settings as $field => $values){
 			$Model->validate[$field]['allowedValues'] = array(
@@ -37,7 +37,7 @@ class EnumBehavior extends ModelBehavior {
 		  	);
 		}
 	}
-	
+
 	/**
 	 * Returns an array of all enum values for the Model
 	 * @example $this->set($this->{$this->ModelName}->enumValues());
@@ -54,7 +54,7 @@ class EnumBehavior extends ModelBehavior {
 		}
 		return $return;
 	}
-	
+
 	/**
 	 * Translates the values
 	 * @param array $values Values of the ENUM field
@@ -66,5 +66,5 @@ class EnumBehavior extends ModelBehavior {
 		}
 		return $return;
 	}
-	
+
 }
