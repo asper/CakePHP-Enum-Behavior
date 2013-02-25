@@ -26,12 +26,12 @@ class EnumBehavior extends ModelBehavior {
 	 * 	)
 	 * );
 	 * @param object $Model Model using this behavior
-	 * @param array $settings Configuration settings for $Model
+	 * @param array $config Configuration settings for $Model
 	 */
-	public function setup($Model, $settings = array()) {
-		$this->settings[$Model->name] = $settings;
-		foreach($settings as $field => $values){
-			$Model->validate[$field]['allowedValues'] = array(
+	public function setup(Model $model, $config = array()) {
+		$this->settings[$model->name] = $config;
+		foreach($config as $field => $values){
+			$model->validate[$field]['allowedValues'] = array(
 		  		'rule' => array('inList', $values),
 		  		'message' => __('Please choose ont of the following values : %s', join(', ', $this->__translate($values))),
 		  	);
@@ -43,7 +43,7 @@ class EnumBehavior extends ModelBehavior {
 	 * @example $this->set($this->{$this->ModelName}->enumValues());
 	 * @param object $Model Model using this behavior
 	 */
-	public function enumValues($Model){
+	public function enumValues(Model $Model){
 		$return = array();
 		if(isset($this->settings[$Model->name])){
 			foreach($this->settings[$Model->name] as $field => $values){
