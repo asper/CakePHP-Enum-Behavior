@@ -28,13 +28,38 @@ class EnumBehavior extends ModelBehavior {
 	 * @param object $Model Model using this behavior
 	 * @param array $config Configuration settings for $Model
 	 */
-	public function setup(Model $model, $config = array()) {
-		$this->settings[$model->name] = $config;
+	public function setup(Model $Model, $config = array()) {
+		$this->settings[$Model->name] = $config;
+		$schema = $Model->schema();
 		foreach($config as $field => $values){
-			$model->validate[$field]['allowedValues'] = array(
-		  		'rule' => array('inList', $values),
-		  		'message' => __('Please choose ont of the following values : %s', join(', ', $this->__translate($values))),
-		  	);
+			$baseRule = array(
+				'rule' => array('inList', $values),
+				'message' => __('Please choose one of the following values : %s', join(', ', $this->__translate($values))),
+				'allowEmpty' => in_array(null, $values) || in_array('', $values),
+				'required' => false
+			);
+			if(
+				isset($schema[$field])
+				&& isset($schema[$field]['null']) 
+				&& !$schema[$field]['null']
+			){
+				$Model->validate[$field]['allowedValuesCreate'] = array_merge(
+					$baseRule,
+					array(
+						'required' => true,
+						'on' => 'create'
+					)
+				);
+				$Model->validate[$field]['allowedValuesUpdate'] = array_merge(
+					$baseRule,
+					array(
+						'on' => 'update'
+					)
+				);
+			}
+			else {
+				$Model->validate[$field]['allowedValues'] = $baseRule;
+			}
 		}
 	}
 
