@@ -11,14 +11,14 @@ This behavior is using an other approach, it stores the configuration in an arra
 Installation
 ------------
 
-Simply put the `Enum` folder and its content in your `app/Plugin` folder.
+Simply download and put it in the `CakephpEnumBehavior` folder and its content in your `app/Plugin` folder.
 
 Load plugin in `app/Config/bootstrap.php` :
 
-	CakePlugin::load('Enum');
+	CakePlugin::load('CakephpEnumBehavior');
 
 Using composer: 
-    
+
     "require" : {
         "asper/cakephp-enum-behavior": "*"
     }
@@ -37,8 +37,8 @@ Table data :
 
 In your `Post` model : 
 
-    $actsAs = array(
-    	'Enum.Enum' => array(
+    public $actsAs = array(
+    	'CakephpEnumBehavior.Enum' => array(
     		'status' => array('draft', 'published', 'archive')
     	)
     );
