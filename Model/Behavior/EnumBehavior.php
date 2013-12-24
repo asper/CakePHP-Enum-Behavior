@@ -73,7 +73,9 @@ class EnumBehavior extends ModelBehavior {
 		if(isset($this->settings[$Model->name])){
 			foreach($this->settings[$Model->name] as $field => $values){
 				if(!empty($values)){
-					$return[Inflector::pluralize(Inflector::variable($field))] = array_combine($values, $this->__translate($values));
+					foreach($values as $key => $value)
+						$values[$key] =  __(Inflector::humanize($value));
+					$return[Inflector::pluralize(Inflector::variable($field))] = $values;
 				}
 			}
 		}
