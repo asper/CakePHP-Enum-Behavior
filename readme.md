@@ -17,6 +17,12 @@ Load plugin in `app/Config/bootstrap.php` :
 
 	CakePlugin::load('Enum');
 
+Using composer: 
+    
+    "require" : {
+        "asper/cakephp-enum-behavior": "*"
+    }
+
 Usage
 -----
 
