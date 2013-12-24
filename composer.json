@@ -3,6 +3,7 @@
     "type": "cakephp-plugin",
     "description" : "Introduces an alternative way to support some ENUM types in CakePHP",
     "keywords": ["cakephp","behavior","enum"],
+    "minimum-stability": "dev",
     "require": {
         "composer/installers": "*"
     }
