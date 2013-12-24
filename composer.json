@@ -2,9 +2,5 @@
     "name": "asper/cakephp-enum-behavior",
     "type": "cakephp-plugin",
     "description" : "Introduces an alternative way to support some ENUM types in CakePHP",
-    "keywords": ["cakephp","behavior","enum"],
-    "minimum-stability": "dev",
-    "require": {
-        "composer/installers": "*"
-    }
+    "keywords": ["cakephp","behavior","enum"]
 }
