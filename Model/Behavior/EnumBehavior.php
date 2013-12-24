@@ -21,8 +21,8 @@ class EnumBehavior extends ModelBehavior {
 	 * Setup enum behavior with the specified configuration settings.
 	 *
 	 * @example $actsAs = array(
-	 * 	'Enum.Enum' => array(
-	 * 		'exemple_field' => array('value_1', 'value_2')
+	 * 	'CakephpEnumBehavior.Enum' => array(
+	 * 		'exemple_field' => array(1 => 'value_1', 'key' => 'value_2')
 	 * 	)
 	 * );
 	 * @param object $Model Model using this behavior
@@ -33,7 +33,8 @@ class EnumBehavior extends ModelBehavior {
 		$schema = $Model->schema();
 		foreach($config as $field => $values){
 			$baseRule = array(
-				'rule' => array('inList', $values),
+				/* All types to string conversion */
+				'rule' => array('inList', array_map(function($v){ return (string)$v; }, array_keys($values))), 
 				'message' => __('Please choose one of the following values : %s', join(', ', $this->__translate($values))),
 				'allowEmpty' => in_array(null, $values) || in_array('', $values),
 				'required' => false
