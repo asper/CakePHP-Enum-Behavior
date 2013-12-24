@@ -5,8 +5,8 @@
  * @example
  * In your Model :
  * $actsAs = array(
- * 	'Enum.Enum' => array(
- * 		'exemple_field' => array('value_1', 'value_2')
+ * 	'CakephpEnumBehavior.Enum' => array(
+ * 		'exemple_field' => array(1 => 'value_1', 'key' => 'value_2')
  * 	)
  * );
  * In your controller :
