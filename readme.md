@@ -43,6 +43,14 @@ In your `Post` model :
     	)
     );
 
+You can use named keys in associative array with key as data field value
+
+    public $actsAs = array(
+        'CakephpEnumBehavior.Enum' => array(
+            'status' => array(23 => 'draft', 'pub' => 'published', 2 => 'archive')
+        )
+    );    
+
 In your `Posts` controller, in the `beforeRender` callback add :
 
     $this->set($this->Post->enumValues());
