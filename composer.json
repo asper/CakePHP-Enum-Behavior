@@ -2,5 +2,6 @@
     "name": "asper/cakephp-enum-behavior",
     "type": "cakephp-plugin",
     "description" : "Introduces an alternative way to support some ENUM types in CakePHP",
+    "license": "MIT",
     "keywords": ["cakephp","behavior","enum"]
 }
