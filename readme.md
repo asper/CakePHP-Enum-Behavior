@@ -69,6 +69,12 @@ If yout want the strings to be translated, add (anywhere in your application [ev
     __('Published');
     __('Archive');
 
+Credits
+-------
+
+- [kaiyou](https://github.com/kaiyou) : Strict compatibility with CakePHP 2.3.0
+- [Andrew Bashtannik](https://github.com/a-bashtannik) : Composer compatibility
+
 License
 -------
 
