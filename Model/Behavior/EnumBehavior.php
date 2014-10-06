@@ -65,6 +65,40 @@ class EnumBehavior extends ModelBehavior {
 		}
 	}
 
+
+	/**
+	 * convert given $field $value (array value) to enum key (array key)
+	 * @param object $Model Model using this behavior
+	 * @param  string $field requested field
+	 * @param  string $value enum value
+	 * @return false/int        enum key, or false if not found 
+	 */
+	public function enumValueToKey(Model $Model, $field, $value) {
+		$enums = $this->enumValues($Model);
+		if(array_key_exists($field, $enums)) {
+			$enum = $enums[$field];
+			return array_search($value, $enum);
+		}
+		return false;
+	}
+
+	/**
+	 * Convert given $field $key (array key) to value (array value)
+	 * @param object $Model Model using this behavior
+	 * @param  string $field requested enum field
+	 * @param  int $key enum array key
+	 * @return false/int        enum value, or false if not found
+	 */
+	public function enumKeyToValue(Model $Model, $field, $key) {
+		$enums = $this->enumValues($Model);
+		if(array_key_exists($field, $enums)) {
+			$enum = $enums[$field];
+			if(array_key_exists($key, $enum))
+				return $enum[$key];
+		}
+		return false;
+	}
+
 	/**
 	 * Returns an array of all enum values for the Model
 	 * @example $this->set($this->{$this->ModelName}->enumValues());
