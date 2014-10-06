@@ -35,7 +35,7 @@ class EnumBehavior extends ModelBehavior {
 		foreach($config as $field => $values){
 			$baseRule = array(
 				/* All types to string conversion */
-				'rule' => array('inList', array_map(function($v){ return (string)$v; }, array_keys($values))), 
+				'rule' => array('inList', array_map(function($v){ return (string)$v; }, array_keys($values)), false), 
 				'message' => __('Please choose one of the following values : %s', join(', ', $this->__translate($values))),
 				'allowEmpty' => in_array(null, $values) || in_array('', $values),
 				'required' => false
