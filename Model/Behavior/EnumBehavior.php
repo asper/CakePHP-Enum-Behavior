@@ -5,14 +5,15 @@
  * @example
  * In your Model :
  * $actsAs = array(
- * 	'CakephpEnumBehavior.Enum' => array(
- * 		'exemple_field' => array(1 => 'value_1', 'key' => 'value_2')
- * 	)
+ *  'CakePHP-Enum-Behavior.Enum' => array(
+ *      'exemple_field' => array(1 => 'value_1', 'key' => 'value_2')
+ *  )
  * );
  * In your controller :
  * $this->set($this->{$this->ModelName}->enumValues());
  *
- * @author Pierre Aboucaya - Asper <p@asper.fr>
+ * @author Created: Pierre Aboucaya - Asper <p@asper.fr>
+ * @author Updated: Tomasz Mazur <cakephp@tomaszmazur.eu>
  *
  */
 class EnumBehavior extends ModelBehavior {
@@ -21,9 +22,9 @@ class EnumBehavior extends ModelBehavior {
 	 * Setup enum behavior with the specified configuration settings.
 	 *
 	 * @example $actsAs = array(
-	 * 	'CakephpEnumBehavior.Enum' => array(
-	 * 		'exemple_field' => array(1 => 'value_1', 'key' => 'value_2')
-	 * 	)
+	 *  'CakePHP-Enum-Behavior.Enum' => array(
+	 *      'exemple_field' => array(1 => 'value_1', 'key' => 'value_2')
+	 *  )
 	 * );
 	 * @param object $Model Model using this behavior
 	 * @param array $config Configuration settings for $Model

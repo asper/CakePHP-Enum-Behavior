@@ -11,17 +11,21 @@ This behavior is using an other approach, it stores the configuration in an arra
 Installation
 ------------
 
-Simply download and put it in the `CakephpEnumBehavior` folder and its content in your `app/Plugin` folder.
+Simply download and put it in the `CakePHP-Enum-Behavior` folder and its content in your `app/Plugin` folder.
 
 Load plugin in `app/Config/bootstrap.php` :
 
-	CakePlugin::load('CakephpEnumBehavior');
+	CakePlugin::load('CakePHP-Enum-Behavior');
 
 Using composer: 
 
     "require" : {
         "asper/cakephp-enum-behavior": "*"
     }
+
+As a git submodule (execute inside `app/Plugin`):
+
+    git submodule add https://github.com/asper/CakePHP-Enum-Behavior.git
 
 Usage
 -----
@@ -38,7 +42,7 @@ Table data :
 In your `Post` model : 
 
     public $actsAs = array(
-    	'CakephpEnumBehavior.Enum' => array(
+    	'CakePHP-Enum-Behavior.Enum' => array(
     		'status' => array('draft', 'published', 'archive')
     	)
     );
@@ -46,7 +50,7 @@ In your `Post` model :
 You can use named keys in associative array with key as data field value
 
     public $actsAs = array(
-        'CakephpEnumBehavior.Enum' => array(
+        'CakePHP-Enum-Behavior.Enum' => array(
             'status' => array(23 => 'draft', 'pub' => 'published', 2 => 'archive')
         )
     );    
@@ -74,6 +78,7 @@ Credits
 
 - [kaiyou](https://github.com/kaiyou) : Strict compatibility with CakePHP 2.3.0
 - [Andrew Bashtannik](https://github.com/a-bashtannik) : Composer compatibility
+- [Tomasz Mazur](https://github.com/tmazur) : Change Plugin name to reflect GitHub project name (allows use of Plugin as git submodule)
 
 License
 -------
