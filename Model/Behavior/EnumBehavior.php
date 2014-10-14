@@ -5,14 +5,15 @@
  * @example
  * In your Model :
  * $actsAs = array(
- * 	'CakephpEnumBehavior.Enum' => array(
- * 		'exemple_field' => array(1 => 'value_1', 'key' => 'value_2')
- * 	)
+ *  'CakePHP-Enum-Behavior.Enum' => array(
+ *      'exemple_field' => array(1 => 'value_1', 'key' => 'value_2')
+ *  )
  * );
  * In your controller :
  * $this->set($this->{$this->ModelName}->enumValues());
  *
- * @author Pierre Aboucaya - Asper <p@asper.fr>
+ * @author Created: Pierre Aboucaya - Asper <p@asper.fr>
+ * @author Updated: Tomasz Mazur <cakephp@tomaszmazur.eu>
  *
  */
 class EnumBehavior extends ModelBehavior {
@@ -21,9 +22,9 @@ class EnumBehavior extends ModelBehavior {
 	 * Setup enum behavior with the specified configuration settings.
 	 *
 	 * @example $actsAs = array(
-	 * 	'CakephpEnumBehavior.Enum' => array(
-	 * 		'exemple_field' => array(1 => 'value_1', 'key' => 'value_2')
-	 * 	)
+	 *  'CakePHP-Enum-Behavior.Enum' => array(
+	 *      'exemple_field' => array(1 => 'value_1', 'key' => 'value_2')
+	 *  )
 	 * );
 	 * @param object $Model Model using this behavior
 	 * @param array $config Configuration settings for $Model
@@ -34,7 +35,7 @@ class EnumBehavior extends ModelBehavior {
 		foreach($config as $field => $values){
 			$baseRule = array(
 				/* All types to string conversion */
-				'rule' => array('inList', array_map(function($v){ return (string)$v; }, array_keys($values))), 
+				'rule' => array('inList', array_map(function($v){ return (string)$v; }, array_keys($values)), false), 
 				'message' => __('Please choose one of the following values : %s', join(', ', $this->__translate($values))),
 				'allowEmpty' => in_array(null, $values) || in_array('', $values),
 				'required' => false
@@ -62,6 +63,40 @@ class EnumBehavior extends ModelBehavior {
 				$Model->validate[$field]['allowedValues'] = $baseRule;
 			}
 		}
+	}
+
+
+	/**
+	 * convert given $field $value (array value) to enum key (array key)
+	 * @param object $Model Model using this behavior
+	 * @param  string $field requested field
+	 * @param  string $value enum value
+	 * @return false/int        enum key, or false if not found 
+	 */
+	public function enumValueToKey(Model $Model, $field, $value) {
+		$enums = $this->enumValues($Model);
+		if(array_key_exists($field, $enums)) {
+			$enum = $enums[$field];
+			return array_search($value, $enum);
+		}
+		return false;
+	}
+
+	/**
+	 * Convert given $field $key (array key) to value (array value)
+	 * @param object $Model Model using this behavior
+	 * @param  string $field requested enum field
+	 * @param  int $key enum array key
+	 * @return false/int        enum value, or false if not found
+	 */
+	public function enumKeyToValue(Model $Model, $field, $key) {
+		$enums = $this->enumValues($Model);
+		if(array_key_exists($field, $enums)) {
+			$enum = $enums[$field];
+			if(array_key_exists($key, $enum))
+				return $enum[$key];
+		}
+		return false;
 	}
 
 	/**
